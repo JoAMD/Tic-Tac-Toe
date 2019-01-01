@@ -14,14 +14,16 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
     private ArrayList<ImageView> boxes;
-    private int ctr = 0, i;
+    private int ctr = 0, pos = -1;
     private Button newGameBtn;
     private TextView player1, player2;
-    private String gameMode, player1Name, player2Name;
+    private String gameMode = "AI", player1Name, player2Name;
+    private boolean isAImoved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
 //-----------------------SETTING ONCLICKLISTENERS-----------------------
 
-        for(i = 0; i < 9; ++i) {
+        for(int i = 0; i < 9; ++i) {
             final int tempI = i;
             boxes.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -61,19 +63,16 @@ public class GameActivity extends AppCompatActivity {
                         boxes.get(tempI).setTag("X");
                         player1.setBackground(null);
                         player2.setBackgroundResource(R.drawable.grey_oval);
-                        if(gameMode == "AI"){
-                            int pos = nextMove();
-                            boxes.get(pos).performClick();
-                        }
                     }
                     else {
                         boxes.get(tempI).setImageResource(R.drawable.o_orange);
                         boxes.get(tempI).setTag("O");
+                        boxes.get(tempI).setClickable(false);
                         player2.setBackground(null);
                         player1.setBackgroundResource(R.drawable.grey_oval);
                     }
+
                     ctr++;
-                    boxes.get(tempI).setClickable(false);
 
 
                     //-----------------------DISABLING ONCLICKLISTENERS / GAME OVER CONDITIONS-----------------------
@@ -122,7 +121,23 @@ public class GameActivity extends AppCompatActivity {
                     }
 
 
+
+                    //------------------------------------------------AI IF CONDITION------------------------------------------------
+                    if(gameMode.equals("AI") && ctr % 2 == 1){
+                        nextMove();
+                    }
+
+
+                    //-----------------------------DRAW CONDITION-----------------------------
+                    if(ctr == 9){
+                        Toast.makeText(GameActivity.this, "The game is a draw!", Toast.LENGTH_SHORT).show();
+                        player2.setBackground(null);
+                        for(int i = 0; i < 9; ++i)
+                            boxes.get(i).setClickable(false);
+                    }
+
                 }
+
             });
         }
 
@@ -130,7 +145,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ctr = 0;
-                for(i = 0; i < 9; ++i) {
+                for(int i = 0; i < 9; ++i) {
                     boxes.get(i).setImageDrawable(null);
                     boxes.get(i).setClickable(true);
                     boxes.get(i).setTag("N");
@@ -140,9 +155,19 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    //--------------------------------Core code of the AI--------------------------------
-    public int nextMove(){
-        return 0;
+
+    //-------------------------------------------Core code of the AI-------------------------------------------
+    public void nextMove(){
+        Random rand = new Random();
+        int k = 0;
+        while(k < 10) {
+            pos = rand.nextInt(9);
+            if (boxes.get(pos).getTag().equals("N")) {
+                boxes.get(pos).performClick();
+                break;
+            }
+            ++k;
+        }
     }
 
 

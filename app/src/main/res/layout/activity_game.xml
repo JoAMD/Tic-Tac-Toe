@@ -22,7 +22,7 @@
         android:id="@+id/player2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mano"
+        android:text="AI"
         style="@style/text"
         app:layout_constraintBottom_toTopOf="@id/gameCardView"
         app:layout_constraintRight_toRightOf="parent"
