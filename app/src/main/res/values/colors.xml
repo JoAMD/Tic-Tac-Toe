@@ -4,9 +4,12 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="buttonBlue">#3366FF</color>
     <color name="whiteBackground">#FFFFFF</color>
     <color name="greyStroke">#b1b1b1</color>
 
     <color name="greyHighlight">#d9d9d9</color>
+
+    <color name="buttonBlue">#3366FF</color>
+
+    <color name="mainPageText">#336699</color>
 </resources>

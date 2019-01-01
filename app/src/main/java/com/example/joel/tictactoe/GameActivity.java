@@ -67,11 +67,10 @@ public class GameActivity extends AppCompatActivity {
                     else {
                         boxes.get(tempI).setImageResource(R.drawable.o_orange);
                         boxes.get(tempI).setTag("O");
-                        boxes.get(tempI).setClickable(false);
                         player2.setBackground(null);
                         player1.setBackgroundResource(R.drawable.grey_oval);
                     }
-
+                    boxes.get(tempI).setClickable(false);
                     ctr++;
 
 
@@ -84,6 +83,7 @@ public class GameActivity extends AppCompatActivity {
                             for(int j = 0; j < 9; ++j) {
                                 boxes.get(j).setClickable(false);
                             }
+                            return;
                         }
                     }
                     if(boxes.get(0).getTag().equals(boxes.get(0 + 4).getTag()) && boxes.get(0).getTag().equals(boxes.get(0 + 8).getTag()) && boxes.get(0 + 4).getTag().equals(boxes.get(0 + 8).getTag())) {
@@ -92,6 +92,7 @@ public class GameActivity extends AppCompatActivity {
                             for(int j = 0; j < 9; ++j) {
                                 boxes.get(j).setClickable(false);
                             }
+                            return;
                         }
                     }
 
@@ -104,6 +105,7 @@ public class GameActivity extends AppCompatActivity {
                                 for(int j = 0; j < 9; ++j) {
                                     boxes.get(j).setClickable(false);
                                 }
+                                return;
                             }
                         }
                     }
@@ -116,6 +118,7 @@ public class GameActivity extends AppCompatActivity {
                                 for(int j = 0; j < 9; ++j) {
                                     boxes.get(j).setClickable(false);
                                 }
+                                return;
                             }
                         }
                     }
@@ -134,6 +137,7 @@ public class GameActivity extends AppCompatActivity {
                         player2.setBackground(null);
                         for(int i = 0; i < 9; ++i)
                             boxes.get(i).setClickable(false);
+                        return;
                     }
 
                 }
@@ -168,45 +172,5 @@ public class GameActivity extends AppCompatActivity {
             }
             ++k;
         }
-    }
 
-
-    /*
-// CODE FROM - http://techblog.sharpmind.de/?p=49
-    private boolean isImageEqualToRes(ImageView actualImageView,
-                                      int expectedDrawable) {
-
-        Drawable expected = getDrawable(expectedDrawable);
-        Drawable actual = actualImageView.getDrawable();
-
-        if (expected != null && actual != null) {
-            Bitmap expectedBitmap = getBitmapOfDrawable(expected);
-            Bitmap actualBitmap = getBitmapOfDrawable(actual);
-
-            return areBitmapsEqual(expectedBitmap, actualBitmap);
-        }
-        return false;
-    }
-    private static Bitmap getBitmapOfDrawable(Drawable drawable) {
-        BitmapDrawable bd = (BitmapDrawable) drawable;
-        Bitmap bitmap = bd.getBitmap();
-        return bitmap;
-    }
-    private static boolean areBitmapsEqual(Bitmap bitmap1, Bitmap bitmap2) {
-        // compare two bitmaps by their bytes
-        byte[] array1 = BitmapToByteArray(bitmap1);
-        byte[] array2 = BitmapToByteArray(bitmap2);
-        if (java.util.Arrays.equals(array1, array2)) {
-            return true;
-        }
-        return false;
-    }
-    private static byte[] BitmapToByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-        byte[] result = bos.toByteArray();
-        return result;
-    }
-//CODE FROM - http://techblog.sharpmind.de/?p=49
-*/
 }

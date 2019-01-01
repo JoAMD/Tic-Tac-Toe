@@ -15,7 +15,6 @@
         app:layout_constraintBottom_toTopOf="@id/gameCardView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/player2"
-        android:gravity="center"
         android:background="@drawable/grey_oval"/>
 
     <TextView
