@@ -19,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
         withAI = findViewById(R.id.withAI);
         withAFriend = findViewById(R.id.withAFriend);
 
-        final Intent ChooseSide = new Intent(MainActivity.this, ChooseSideActivity.class);
 
         //Setting OnClickListener
         withAI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Initialising Intent
+                Intent ChooseSide = new Intent(MainActivity.this, ChooseSideActivity.class);
                 ChooseSide.putExtra("gameMode", "AI");
                 startActivity(ChooseSide);
 
@@ -33,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
         withAFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChooseSide.putExtra("gameMode", "Friend");
-                startActivity(ChooseSide);
+                //Initialising Intent
+                Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
+                gameActivity.putExtra("gameMode", "Friend");
+                startActivity(gameActivity);
             }
         });
     }
