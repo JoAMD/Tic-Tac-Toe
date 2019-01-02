@@ -20,7 +20,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     private ArrayList<ImageView> boxes;
-    private int ctr = 0, pos = -1;
+    private int ctr = 0, pos = -1, clickCount = 0;
     private Button newGameBtn;
     private TextView player1, player2;
     private String gameMode, sideChosen, player1Name, player2Name;
@@ -205,25 +205,80 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    //-------------------------------------------Core code of the AI-------------------------------------------
-    public void nextMove() {
-        Random rand = new Random();
-        int k = 0;
-        while (true) {
-            pos = rand.nextInt(9);
-            if (boxes.get(pos).getTag().equals("N")) {
-                boxes.get(pos).performClick();
-                break;
-            }
-            ++k;
-        }
-    }
-
+    //---------------------Function to get Name of winner--------------------
     public String playerNamefinder(int i){
         if(gameMode.equals("AI") && sideChosen.equals("O"))
             return boxes.get(i).getTag()=="X" ? player2Name : player1Name;
         else
             return boxes.get(i).getTag()=="X" ? player1Name : player2Name;
+    }
+
+
+
+    //-------------------------------------------Core code of the AI-------------------------------------------
+    public void nextMove() {
+        clickCount = 0;
+
+        //diagonals
+        chk(0, 8);
+        if(clickCount >= 1)
+            return;
+        chk(2, 6);
+        if(clickCount >= 1)
+            return;
+
+        //sides
+        chk(0, 2);
+        if(clickCount >= 1)
+            return;
+        chk(2, 8);
+        if(clickCount >= 1)
+            return;
+        chk(6, 8);
+        if(clickCount >= 1)
+            return;
+        chk(0, 6);
+        if(clickCount > 1)
+            return;
+
+        //cross
+        chk(1, 7);
+        if(clickCount >= 1)
+            return;
+        chk(3, 5);
+        if(clickCount >= 1)
+            return;
+        else if(boxes.get(4).getTag().equals("N"))
+            boxes.get(4).performClick();
+        else{
+            Random rand = new Random();
+            int k = 0;
+            while (true) {
+                pos = rand.nextInt(9);
+                if (boxes.get(pos).getTag().equals("N")) {
+                    boxes.get(pos).performClick();
+                    break;
+                }
+                ++k;
+            }
+        }
+
+    }
+
+    public void chk(int a, int b){
+        int c = (a + b) / 2, temp;
+        for(int i = 0; i < 3; ++i) {
+            if (boxes.get(a).getTag().equals(boxes.get(b).getTag()) && boxes.get(a).getTag().equals(sideChosen) && boxes.get(c).getTag().equals("N")) {
+                Toast.makeText(this, "clicked logically!", Toast.LENGTH_SHORT).show();
+                clickCount++;
+                boxes.get(c).performClick();
+                return;
+            }
+            temp = c;
+            c = a;
+            a = b;
+            b = temp;
+        }
     }
 
 }
