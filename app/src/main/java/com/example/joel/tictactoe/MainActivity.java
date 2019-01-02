@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,22 +19,22 @@ public class MainActivity extends AppCompatActivity {
         withAI = findViewById(R.id.withAI);
         withAFriend = findViewById(R.id.withAFriend);
 
-        final Intent GameActivity = new Intent(MainActivity.this, com.example.joel.tictactoe.GameActivity.class);
+        final Intent ChooseSide = new Intent(MainActivity.this, ChooseSideActivity.class);
 
         //Setting OnClickListener
         withAI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameActivity.putExtra("gameMode", "AI");
-                startActivity(GameActivity);
+                ChooseSide.putExtra("gameMode", "AI");
+                startActivity(ChooseSide);
 
             }
         });
         withAFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameActivity.putExtra("gameMode", "Friend");
-                startActivity(GameActivity);
+                ChooseSide.putExtra("gameMode", "Friend");
+                startActivity(ChooseSide);
             }
         });
     }

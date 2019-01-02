@@ -15,7 +15,7 @@
         android:src="@drawable/x_blue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline1"/>
+        app:layout_constraintBottom_toTopOf="@id/main_guideline1"/>
 
     <ImageView
         android:id="@+id/oLogo"
@@ -25,10 +25,10 @@
         android:src="@drawable/o_orange"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline1"/>
+        app:layout_constraintBottom_toTopOf="@id/main_guideline1"/>
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/main_guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -43,15 +43,16 @@
         android:textColor="@color/mainPageText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline1"
-        app:layout_constraintBottom_toTopOf="@id/withAI"/>
+        app:layout_constraintTop_toBottomOf="@id/main_guideline1"
+        app:layout_constraintBottom_toTopOf="@id/withAI"
+        android:layout_marginBottom="30dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/withAI"
         android:text="With AI"
-        style="@style/text"
+        style="@style/buttonText"
         android:textAllCaps="false"
         android:background="@color/buttonBlue"
         app:layout_constraintTop_toBottomOf="@id/chooseMode"
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/withAFriend"
         android:text="With a friend"
-        style="@style/text"
+        style="@style/buttonText"
         android:textAllCaps="false"
         android:background="@color/whiteBackground"
         app:layout_constraintTop_toBottomOf="@id/withAI"
@@ -73,7 +74,7 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline2"
+        android:id="@+id/main_guideline2"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85"/>
 

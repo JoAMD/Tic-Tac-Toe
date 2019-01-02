@@ -6,4 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".ChooseSideActivity">
 
+    <TextView
+        android:id="@+id/chooseMode"
+        style="@style/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick your side"
+        android:textColor="@color/mainPageText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/choose_side_guideline1"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/choose_side_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.325"/>
+
+    <ImageView
+        android:id="@+id/xLogo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="55dp"
+        android:src="@drawable/x_blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/radioGroup"
+        app:layout_constraintVertical_bias="0.73"/>
+    <ImageView
+        android:id="@+id/oLogo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="55dp"
+        android:src="@drawable/o_orange"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/radioGroup"
+        app:layout_constraintVertical_bias="0.73"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chooseX"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/chooseO"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chooseO"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/chooseX"/>
+        </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/choose_side_continueBtn"
+        android:text="Continue"
+        style="@style/buttonText"
+        android:textAllCaps="false"
+        android:background="@color/whiteBackground"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

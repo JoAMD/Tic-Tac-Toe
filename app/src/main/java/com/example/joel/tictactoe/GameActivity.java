@@ -20,10 +20,10 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     private ArrayList<ImageView> boxes;
-    private int ctr = 0, pos = -1;
+    private int ctr = 0, pos = -1, sideChoosingInt = 0;
     private Button newGameBtn;
     private TextView player1, player2;
-    private String gameMode, player1Name, player2Name;
+    private String gameMode, sideChosen, player1Name, player2Name;
     private boolean isAImoved = false;
 
     @Override
@@ -32,8 +32,14 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         //Getting Intent
-        Intent dataGameMode = getIntent();
-        gameMode = dataGameMode.getStringExtra("gameMode");
+        Intent data = getIntent();
+        gameMode = data.getStringExtra("gameMode");
+        sideChosen = data.getStringExtra("sideChosen");
+
+        //Assigning sides
+        if(sideChosen.equals("O")){
+            sideChoosingInt = 1;
+        }
 
         //Initialising Variables
         boxes = new ArrayList<>();
@@ -71,7 +77,7 @@ public class GameActivity extends AppCompatActivity {
             boxes.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (ctr % 2 == 0) {
+                    if (ctr % 2 == sideChoosingInt) {
                         boxes.get(tempI).setImageResource(R.drawable.x_blue);
                         boxes.get(tempI).setTag("X");
                         player1.setBackground(null);
@@ -139,7 +145,7 @@ public class GameActivity extends AppCompatActivity {
 
 
                     //------------------------------------------------AI IF CONDITION------------------------------------------------
-                    if(gameMode.equals("AI") && ctr % 2 == 1){
+                    if(gameMode.equals("AI") && ctr % 2 == (sideChoosingInt == 0 ? 1 : 0) ){
                         nextMove();
                     }
 
@@ -179,7 +185,7 @@ public class GameActivity extends AppCompatActivity {
         int k = 0;
         while (k < 20) { //Take care of this.....!!!!!!!
             pos = rand.nextInt(9);
-            if (boxes.get(pos).getTag().equals("N")) {
+            if (boxes.get(pos).getTag().equals("N")) { // put this as while condn ( boxes.get(pos).getTag().equals("N") )
                 boxes.get(pos).performClick();
                 break;
             }

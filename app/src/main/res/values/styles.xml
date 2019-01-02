@@ -10,6 +10,13 @@
 
     <style name="text">
         <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="buttonText">
+        <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:textSize">12sp</item>
         <item name="android:layout_marginBottom">16dp</item>
         <item name="android:paddingHorizontal">8dp</item>
