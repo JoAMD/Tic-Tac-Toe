@@ -1,5 +1,6 @@
 package com.example.joel.tictactoe;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,7 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private int ctr = 0, pos = -1;
     private Button newGameBtn;
     private TextView player1, player2;
-    private String gameMode = "AI", player1Name, player2Name;
+    private String gameMode, player1Name, player2Name;
     private boolean isAImoved = false;
 
     @Override
@@ -30,6 +31,11 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //Getting Intent
+        Intent dataGameMode = getIntent();
+        gameMode = dataGameMode.getStringExtra("gameMode");
+
+        //Initialising Variables
         boxes = new ArrayList<>();
 
         boxes.add((ImageView)findViewById(R.id.box1));
@@ -46,8 +52,15 @@ public class GameActivity extends AppCompatActivity {
 
         player1 = (TextView)findViewById(R.id.player1);
         player2 = (TextView)findViewById(R.id.player2);
-        player1Name = player1.getText() + "";
-        player2Name = player2.getText() + "";
+
+        //Setting player Names
+        player1Name = "Player1";
+        player2Name = "Player2";
+        if(gameMode.equals("AI")){
+            player2Name = "AI";
+        }
+        player1.setText(player1Name);
+        player2.setText(player2Name);
 
 
 
@@ -161,10 +174,10 @@ public class GameActivity extends AppCompatActivity {
 
 
     //-------------------------------------------Core code of the AI-------------------------------------------
-    public void nextMove(){
+    public void nextMove() {
         Random rand = new Random();
         int k = 0;
-        while(k < 10) {
+        while (k < 20) { //Take care of this.....!!!!!!!
             pos = rand.nextInt(9);
             if (boxes.get(pos).getTag().equals("N")) {
                 boxes.get(pos).performClick();
@@ -172,5 +185,6 @@ public class GameActivity extends AppCompatActivity {
             }
             ++k;
         }
+    }
 
 }
