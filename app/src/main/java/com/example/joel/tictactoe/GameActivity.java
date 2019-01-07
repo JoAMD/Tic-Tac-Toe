@@ -29,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
         Intent data = getIntent();
         gameMode = data.getStringExtra("gameMode");
         sidePlayer = data.getStringExtra("sideChosen");
-        if(sidePlayer.equals("O"))
+        if(sidePlayer != null && sidePlayer.equals("O"))
             sideAI = "X";
 
         //Initialising Variables
@@ -72,14 +72,26 @@ public class GameActivity extends AppCompatActivity {
                     if (ctr % 2 == 0) {
                         boxes.get(tempI).setImageResource(R.drawable.x_blue);
                         boxes.get(tempI).setTag("X");
-                        player1.setBackground(null);
-                        player2.setBackgroundResource(R.drawable.grey_oval);
+                        if(gameMode.equals("AI") && sidePlayer.equals("O")){
+                            player1.setBackgroundResource(R.drawable.grey_oval);
+                            player2.setBackground(null);
+                        }
+                        else if(gameMode.equals("AI") && sidePlayer.equals("X")){
+                            player1.setBackground(null);
+                            player2.setBackgroundResource(R.drawable.grey_oval);
+                        }
                     }
                     else {
                         boxes.get(tempI).setImageResource(R.drawable.o_orange);
                         boxes.get(tempI).setTag("O");
-                        player2.setBackground(null);
-                        player1.setBackgroundResource(R.drawable.grey_oval);
+                        if(gameMode.equals("AI") && sidePlayer.equals("O")){
+                            player2.setBackgroundResource(R.drawable.grey_oval);
+                            player1.setBackground(null);
+                        }
+                        else if(gameMode.equals("AI") && sidePlayer.equals("X")){
+                            player2.setBackground(null);
+                            player1.setBackgroundResource(R.drawable.grey_oval);
+                        }
                     }
                     boxes.get(tempI).setClickable(false);
                     ctr++;
@@ -136,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
 
 
                     //-----------------------------DRAW CONDITION-----------------------------
-                    /*
+
                     if(ctr == 9){
                         Toast.makeText(GameActivity.this, "The game is a draw!", Toast.LENGTH_SHORT).show();
                         player2.setBackground(null);
@@ -144,8 +156,9 @@ public class GameActivity extends AppCompatActivity {
                             boxes.get(i).setClickable(false);
                         return;
                     }
-                    */
 
+
+                    /*
                     if(gameMode.equals("AI") && sidePlayer.equals("O")){
                         if(ctr == 10){
                             Toast.makeText(GameActivity.this, "The game is a draw!", Toast.LENGTH_SHORT).show();
@@ -162,7 +175,7 @@ public class GameActivity extends AppCompatActivity {
                             boxes.get(i).setClickable(false);
                         return;
                     }
-
+                    */
 
                     //------------------------------------------------AI IF CONDITION------------------------------------------------
                     if(gameMode.equals("AI") && sidePlayer.equals("X") && ctr % 2 == 1){
@@ -187,16 +200,26 @@ public class GameActivity extends AppCompatActivity {
                     boxes.get(i).setClickable(true);
                     boxes.get(i).setTag("N");
                 }
-                if(gameMode.equals("AI") && sidePlayer.equals("O")){
-                    boxes.get(4).performClick();
+                if(gameMode.equals("Friend")){
+                    player2.setBackground(null);
+                    player1.setBackgroundResource(R.drawable.grey_oval);
+                }
+                else if(gameMode.equals("AI") && sidePlayer.equals("O")){
+                    player2.setBackgroundResource(R.drawable.grey_oval);
+                    player1.setBackground(null);
+                    boxes.get(6).performClick();
+                }
+                else if(gameMode.equals("AI") && sidePlayer.equals("X")){
+                    player2.setBackground(null);
+                    player1.setBackgroundResource(R.drawable.grey_oval);
                 }
             }
         });
 
 
-        //Assigning sides in case its "with AI" (if its "with a friend" choose side activity is skipped
+        //Performing first move in case its "with AI" (if its "with a friend" choose side activity is skipped
         if(gameMode.equals("AI") && sidePlayer.equals("O")){
-            boxes.get(4).performClick();
+            boxes.get(6).performClick();
         }
 
     }
@@ -360,7 +383,7 @@ public class GameActivity extends AppCompatActivity {
                 return;
             */
         }
-        else if(boxes.get(8).getTag().equals("N"))
+        else if(boxes.get(8).getTag().equals("N"))  //whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy???????????????????@#$%^&*(
             boxes.get(8).performClick();
         else{
             Random rand = new Random();
@@ -368,7 +391,7 @@ public class GameActivity extends AppCompatActivity {
             while (true) {
                 pos = rand.nextInt(8);
                 if (boxes.get(pos).getTag().equals("N")) {
-                    Toast.makeText(this, "Random click", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Random click", Toast.LENGTH_SHORT).show();
                     boxes.get(pos).performClick();
                     break;
                 }
@@ -383,7 +406,7 @@ public class GameActivity extends AppCompatActivity {
         int c = (a + b) / 2, temp;
         for(int i = 0; i < 3; ++i) {
             if (boxes.get(a).getTag().equals(boxes.get(b).getTag()) && boxes.get(a).getTag().equals(sideAI) && boxes.get(c).getTag().equals("N")) {
-                Toast.makeText(this, String.format("clicked logically in main Att mode! at box %d", c), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, String.format("clicked logically in main Att mode! at box %d", c), Toast.LENGTH_SHORT).show();
                 clickCount++;
                 boxes.get(c).performClick();
                 return;
@@ -399,7 +422,7 @@ public class GameActivity extends AppCompatActivity {
         int c = (a + b) / 2, temp;
         for(int i = 0; i < 3; ++i) {
             if (boxes.get(a).getTag().equals(boxes.get(b).getTag()) && boxes.get(a).getTag().equals(sidePlayer) && boxes.get(c).getTag().equals("N")) {
-                Toast.makeText(this, String.format("clicked logically in Def mode! at box %d", c), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, String.format("clicked logically in Def mode! at box %d", c), Toast.LENGTH_SHORT).show();
                 clickCount++;
                 boxes.get(c).performClick();
                 return;
@@ -415,7 +438,7 @@ public class GameActivity extends AppCompatActivity {
         int c = (a + b) / 2, temp;
         for(int i = 0; i < 3; ++i) {
             if (boxes.get(a).getTag().equals(boxes.get(b).getTag()) && boxes.get(a).getTag().equals("N") && boxes.get(c).getTag().equals(sideAI)) {
-                Toast.makeText(this, String.format("clicked logically in alt Att mode! at box %d and b=%d", a, b), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, String.format("clicked logically in alt Att mode! at box %d and b=%d", a, b), Toast.LENGTH_SHORT).show();
                 clickCount++;
                 boxes.get(a).performClick();
                 return;
@@ -434,7 +457,7 @@ public class GameActivity extends AppCompatActivity {
 
     public void clickIfLineFree(int toClick, int endOfLine){
         if(!boxes.get(endOfLine).getTag().equals(sidePlayer) && !boxes.get(endOfLine/2 + toClick/2).getTag().equals(sidePlayer)){
-            Toast.makeText(this, "clicked if free", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "clicked if free", Toast.LENGTH_SHORT).show();
             clickCount++;
             boxes.get(toClick).performClick();
         }
